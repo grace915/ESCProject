@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
 
                 phoneNum.setText("");
-                backspace.setVisibility(View.GONE);
+             //   backspace.setVisibility(View.GONE);
                 return true;
             }
         });
