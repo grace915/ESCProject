@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton call;
     private ImageButton backspace;
 
+    //전화번호 검색
+    private TextView name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +102,16 @@ public class MainActivity extends AppCompatActivity {
         call = findViewById(R.id.main_ibtn_call);
         backspace = findViewById(R.id.main_ibtn_backspace);
 
+        name = findViewById(R.id.main_tv_name);
+
         //이벤트 설정
         addContact.setOnClickListener(new View.OnClickListener() {//addContact 저장
             @Override
             public void onClick(View v) {
 
                 Intent addIntent = new Intent(MainActivity.this, AddEditActivity.class);
+                addIntent.putExtra("phone_num", phoneNum.getText().toString());
+                addIntent.putExtra("add_edit","add");
                 startActivity(addIntent);
             }
         });
@@ -113,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent contactIntent = new Intent(MainActivity.this, ContactActivity.class);
+
                 startActivity(contactIntent);
             }
         });
@@ -163,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     message.setVisibility(View.GONE);
                     backspace.setVisibility(View.GONE);
                 }
+                findPhone();
 
             }
 
@@ -181,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 message.setVisibility(View.INVISIBLE);
                 backspace.setVisibility(View.INVISIBLE);
 
+                findPhone();
                 return true;
             }
 
@@ -205,8 +215,45 @@ public class MainActivity extends AppCompatActivity {
                 message.setVisibility(View.VISIBLE);
                 backspace.setVisibility(View.VISIBLE);
 
+                findPhone();
+
+
             }
         });
+    }
+
+    private void findPhone(){
+
+        //존재하는 번호일 때
+        String find = phoneNum.getText().toString().replaceAll("-","");
+
+        int i = 0;
+        int num = 0;
+
+        name.setText("");
+        StringBuffer s = new StringBuffer("");
+
+        for(i = 0; i<DummyData.contacts.size(); i++){
+            if(DummyData.contacts.get(i).getPhone().replaceAll("-","").contains(find)){
+                name.setText(DummyData.contacts.get(i).getName() + " " + DummyData.contacts.get(i).getPhone());
+                s.append(DummyData.contacts.get(i).getName() + " " + DummyData.contacts.get(i).getPhone());
+                s.append("\n");
+                num++;
+
+            }
+        }
+
+        if(num == 0){
+            name.setText("");
+        }
+        else if(num >1){
+            name.setText(s);
+        }
+        num = 0;
+
+
+
+
     }
 
     //dial id 호출을 위한 함수

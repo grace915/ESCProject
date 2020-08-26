@@ -51,6 +51,12 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setInfo(currentPage);
+    }
+
     private void setUpUI() {
         toolbar=findViewById(R.id.contact_toolbar);
         avatar=findViewById(R.id.contact_iv_avatar);
@@ -113,7 +119,11 @@ public class ContactActivity extends AppCompatActivity {
                 startActivity(callIntent);
                 break;
             case R.id.menu_contact_edit:
-                // TODO: 수정
+                Intent editIntent = new Intent(ContactActivity.this, AddEditActivity.class);
+                editIntent.putExtra("add_edit", "edit");
+                editIntent.putExtra("position", currentPage);
+                startActivity(editIntent);
+                break;
             case R.id.menu_contact_message:
                 Intent messageIntent = new Intent(ContactActivity.this, MessageActivity.class);
                 messageIntent.putExtra("phone_num",phone.getText().toString()); // 화면이 넘어갈때 번호 넘기기
