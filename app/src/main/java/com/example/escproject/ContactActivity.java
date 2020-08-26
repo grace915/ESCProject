@@ -83,7 +83,7 @@ public class ContactActivity extends AppCompatActivity {
     private void setInfo(int index){
         name.setText(DummyData.contacts.get(index).getName());
         phone.setText(DummyData.contacts.get(index).getPhone());
-        emil.setText(DummyData.contacts.get(index).getEmil());
+        emil.setText(DummyData.contacts.get(index).getEmail());
 
         if(index == 0){
             prev.setVisibility(View.GONE);

@@ -4,12 +4,12 @@ public class Contact {
 
     private String name;
     private String phone;
-    private String emil;
+    private String email;
 
     public Contact(String name, String phone, String emil) {
         this.name = name;
         this.phone = phone;
-        this.emil = emil;
+        this.email = emil;
     }
 
     public String getName() {
@@ -28,11 +28,11 @@ public class Contact {
         this.phone = phone;
     }
 
-    public String getEmil() {
-        return emil;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmil(String emil) {
-        this.emil = emil;
+    public void setEmail(String emil) {
+        this.email = emil;
     }
 }
